@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import Alert from './components/Alert';
+import About from './components/About';
 function App() {
   const [mode, setMode]=useState('dark');
 
@@ -81,7 +82,8 @@ function App() {
       <Alert alert={alert} mode={mode} />
       {/* <Navbar/> */}
       <div className="container my-3">
-        <TextForm heading="Enter the text to analyze below" mode={mode}showAlert={showAlert}/>
+        {/* <TextForm heading="Enter the text to analyze below" mode={mode}showAlert={showAlert}/> */}
+      <About/>
       </div>
 
 
