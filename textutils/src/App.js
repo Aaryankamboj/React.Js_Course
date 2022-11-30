@@ -4,32 +4,16 @@ import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import Alert from './components/Alert';
-// import About from './components/About';
-// import {
-//   BrowserRouter as Router,
-//   Routes,
-//   Route,
-//   Link
-// } from "react-router-dom";
+import About from './components/About';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
-  const [mode, setMode] = useState('dark');
+  const [mode, setMode] = useState('light');
 
-  /*
-  const [mode, setMode]=useState({
-    color: 'dark', backgroundColor:"light", primaryClr: "primary", greenClr:"success", lightClr:"light"
-  })
-  const switchToGreen = ()=>{
-     setMode({
-      color: 'dark',  backgroundColor:'green', primaryClr:"primary", greenClr:"sucess",lightClr:"light"
-     })
-  }
-  const switchToBlue = ()=>{
-    setMode({
-     color: 'light',  backgroundColor:'primary', primaryClr:"primary", greenClr:"sucess",lightClr:"light"
-    })
- }
- */
   const [alert, setalert] = useState(null);
   const showAlert = (message, type) => {
     setalert({
@@ -40,18 +24,27 @@ function App() {
     }, 2000);
 
   }
+
+  const removeBodyClasses=()=>{
+    document.body.classList.remove('bg-light');
+    document.body.classList.remove('bg-dark');
+    document.body.classList.remove('bg-success');
+    document.body.classList.remove('bg-warning');
+    document.body.classList.remove('bg-danger');
+  }
   const [text, setText] = useState("Dark");
-  const toggleMode = () => {
+  const toggleMode = (cls) => {
+    removeBodyClasses();
+    document.body.classList.add('bg-'+cls);
     if (mode === 'light') {
       setMode('dark');
-      document.body.style.backgroundColor = 'black';
+      document.body.style.backgroundColor = '#042743';
+      document.body.style.color = 'white';
       showAlert("Dark Mode has been enabled", "success")
-      document.title = "TextUtils - Dark Mode";
       setText('Light');
     //   setInterval(() => {
     //     document.title = "TextUtils is amazing";
     //   }, 2000);
-
     //   setInterval(() => {
     //     document.title = "TextUtils download karo";
     //   }, 1500);
@@ -59,48 +52,32 @@ function App() {
     else {
       setMode('light');
       document.body.style.backgroundColor = 'white';
+      document.body.style.color = 'black';
       showAlert("Light Mode has been enabled", "success");
-      document.title = "TextUtils - Light Mode";
-
       setText("Dark");
     }
   }
 
 
   const [text2, setText2] = useState("light");
-  const [noBlue, toBlue] = useState("light");
-  const toggleBlue = () => {
-    if (noBlue === 'blue') {
-      toBlue('light');
-      document.body.style.backgroundColor = 'white';
-      setText2("Blue")
-      // showAlert("Blue Mode has been enabled", "success");
-    }
-    else {
-      toBlue('#85aae1');
-      document.body.style.backgroundColor = '#85aae1';
-      setText2("Light");
-      // showAlert("Blue Mode has been disabled", "warning");
-    }
-  }
+
   return (
     <>
-      {/* <Router> */}
-        <Navbar title="TextUtils" aboutText="AboutTextUtils" mode={mode} noBlue={noBlue} text={text} text2={text2} toggleMode={toggleMode} toggleBlue={toggleBlue} />
+      <Router>
+        <Navbar title="TextUtils" aboutText="About" mode={mode} text={text} text2={text2} toggleMode={toggleMode} />
         <Alert alert={alert} mode={mode} />
         {/* <Navbar/> */}
         <div className="container my-3">
-          {/* <Routes>
-            <Route path="/about" element={<About/>}>
+          <Routes>
+            <Route path="/" element={<TextForm heading="Try TextUtils - Word counter, character counter" mode={mode} showAlert={showAlert} />}>
+            </Route>
+            <Route path="/about" element={<About mode= {mode} />}>
             </Route>
 
-            <Route path="/" element={<TextForm heading="Enter the text to analyze below" mode={mode} showAlert={showAlert} />}>
-            </Route>
 
-          </Routes> */}
-          <TextForm heading="Enter the text to analyze below" mode={mode} showAlert={showAlert}/>
+          </Routes>
         </div>
-      {/* </Router> */}
+      </Router>
     </>
   );
 }

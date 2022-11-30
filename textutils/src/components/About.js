@@ -1,57 +1,71 @@
 import React, { useState } from 'react'
 import propTypes from 'prop-types'
 export default function About(props) {
-    // let myStyle = {
-    //     color: 'white', backgroundColor : 'black'
-    // }
-
-    const [myStyle, setmyStyle] = useState({
-        color: 'Black', backgroundColor: 'white'
-    })
-
-    const [text, setTxt] = useState("Enable Dark Mode");
-
-
-    const toggleChange = () => {
-        if (myStyle.color === 'black') {
-            setmyStyle({
-                color: 'white', backgroundColor: 'black'
-            })
-            setTxt("Enable Light Mode");
-        }
-        else {
-            setmyStyle({
-                color: 'black', backgroundColor: 'white'
-            })
-            setTxt("Enable Dark Mode");
-
-        }
+    let myStyle = {
+        color: props.mode==='dark'?'white':'#042743',
+        backgroundColor :  props.mode==='dark'?'rgb(36,72,104)':'white',
+        borderColor:  props.mode==='dark'?'white':'#042743'
     }
+
+    // const [myStyle, setmyStyle] = useState({
+    //     color: 'Black', backgroundColor: 'white'
+    // })
+
+    // const [text, setTxt] = useState("Enable Dark Mode");
 
     return (
         <div>
-            <div class="card" style={myStyle}>
-                <div class="card-body">
-                    <h5 class="card-title">{props.heading}</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
-                  dipisicing elit. Eos corporis inventore mollitia! Impedit iure quaerat odit neque doloremque saepe. Distinctio atque debitis fugiat vitae in alias nulla, eos quod quia.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos corporis inventore mollitia! Impedit iure quaerat odit neque doloremque saepe. Distinctio atque debitis fugiat vitae in alias nulla, eos quod quia.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos corporis inventore mollitia! Impedit iure quaerat odit neque doloremque saepe. Distinctio atque debitis fugiat vitae in alias nulla, eos quod quia.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos corporis inventore mollitia! Impedit iure quaerat odit neque doloremque saepe. Distinctio atque debitis fugiat vitae in alias nulla, eos quod quia.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos corporis inventore mollitia! Impedit iure quaerat odit neque doloremque saepe. Distinctio atque debitis fugiat vitae in alias nulla, eos quod quia.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos corporis inventore mollitia! Impedit iure quaerat odit neque doloremque saepe. Distinctio atque debitis fugiat vitae in alias nulla, eos quod quia.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos corporis inventore mollitia! Impedit iure quaerat odit neque doloremque saepe. Distinctio atque debitis fugiat vitae in alias nulla, eos quod quia.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos corporis inventore mollitia! Impedit iure quaerat odit neque doloremque saepe. Distinctio atque debitis fugiat vitae in alias nulla, eos quod quia.
-                    
-
-                    </p>
-
-                    <a href="#" class="btn btn-primary" onClick={toggleChange}>{text}</a>
+            <h1 className='text-center' >About Us</h1>
+            <div className="container my-2">
+                <div class="accordion" id="accordionExample" >
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne" >
+                            <button class="accordion-button" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Analyze your text
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body" style={myStyle}>
+                                <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Free to Use
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body" style={myStyle}>
+                                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Browser Compatible
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body" style={myStyle}>
+                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-
-
 
         </div>
     )
 }
+
+
+
+
+
+
+
+

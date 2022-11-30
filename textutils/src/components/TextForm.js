@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 export default function TextForm(props) {
+    
     const handleUpClick = () => {
         console.log("Uppercase clicked" + text);
         let newText = text.toUpperCase();
@@ -39,57 +40,38 @@ export default function TextForm(props) {
     setText(uppercaseFirst);
 
    }
+   const handleCopyText = ()=>{
+    navigator.clipboard.writeText(text);
+    props.showAlert("Text Copied","success")
 
-//    const [numbers, setNumbers]=useState('');
-//    const handlePhoneNumbers = ()=>{
-//     let data = text.split(" ");
-//     let numbers = new Array;
-//     data.forEach((ele)=>{
-//         if(ele.length === 10 && !isNaN(Number(ele))){
-//             numbers.push(ele);
-//         }
-
-//     });
-//     setNumbers(numbers);
-
+   }
    
     const [text, setText] = useState('');
-    function words() {
-        /*
-     # this function returns the number of words  so please use words()
-     # this is perfect function but not sure, Harry Bhai will decide it 
-        
-    */
-        let words = text.trim().split(" ").length;
-        if (words === 1 && text.split(" ")[0] === "") {
-          words = 0;
-          return words;
-        } else {
-          return words;
-        }
-      }
+
     
     return (
         <>
-            <div className={`container text-${props.mode==='light'?'black':'light'}`}>
-                <h1>{props.heading} </h1>
+            {/* <div className={`container text-${props.mode==='light'?'black':'light'}`}> */}
+            <div className="container">
+                <h1 className='mb-3'>{props.heading} </h1>
                 <div className="mb-3">
                     <textarea value={text} class="form-control" onChange={handleOnchange} id="myBox" rows="8"></textarea>
                 </div>
-                <button className="btn btn-primary mx-2" onClick={handleUpClick}> Convert to Uppercase</button>
-                <button className="btn btn-primary mx-2" onClick={handleClear}> Clear</button>
-                <button className="btn btn-primary mx-2" onClick={handleDownload}> Download</button>
-                <button className="btn btn-primary mx-2" onClick={handleDiff}> Convert Differently</button>
-                {/* <button className="btn btn-primary mx-2" onClick={handlePhoneNumbers}> Filter Phone Numbers</button> */}
+                <button disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleUpClick}> Convert to Uppercase</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleClear}> Clear</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleDownload}> Download</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleDiff}> Convert Differently</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleCopyText}> Copy Text</button>
             </div>
 
-            <div className={`container my-2 text-${props.mode==='light'?'black':'light'}`}>
-                <h2>Your text summary </h2>
-                <p> <b>{text.split(" ").length-1}</b> Words and <b> {text.length} </b> characters </p>
-                <p> {0.008 * text.split(" ").length } Minutes Read </p>
+            {/* <div className={`container my-2 text-${props.mode==='light'?'black':'light'}`}> */}
+            <div className="container">
+
+                <h2 className='my-2'>Your text summary </h2>
+                <p> <b>{text.split(/\s+/).filter((elem)=>{return elem.length!==0}).length}</b> Words and <b> {text.length} </b> characters </p>
+                <p> {0.008 * text.split(" ").filter((elem)=>{return elem.length!==0}).length } Minutes Read </p>
                 <h2>Preview</h2>
-                <p> {text}</p>
-                
+                <p> {text.length>0?text: "Nothing to preview!"}</p>                
             </div>
         </>
     )
